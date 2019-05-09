@@ -1,0 +1,26 @@
+-Table "movies" Creation:-
+CREATE TABLE movies(
+	movieId INT NOT NULL AUTO_INCREMENT,
+	movieName VARCHAR(50),
+	movieAge INT,
+	moviePrice INT,
+	PRIMARY KEY (movieId)
+);
+
+-Table "users" Creation:-
+CREATE TABLE users(
+	userId INT NOT NULL AUTO_INCREMENT,
+	userName VARCHAR(50),
+	userPass INT,
+	PRIMARY KEY (userId)
+);
+
+-Table "booking" Creation:-
+CREATE TABLE booking(
+	bookingId INT NOT NULL AUTO_INCREMENT,
+    bookingUserId INT,
+	bookingMovieId INT,
+	PRIMARY KEY (bookingId),
+        FOREIGN KEY (bookingUserId) REFERENCES users(userId),
+    FOREIGN KEY (bookingMovieId) REFERENCES movies(movieId)
+);

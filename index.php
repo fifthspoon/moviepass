@@ -1,3 +1,19 @@
+<!-- Start Page: Guest -->
+<?php 
+/*
+  * Displays all movies
+*/
+
+// Includes functions and connections
+require("includes/conn_mysql.php");
+require("includes/movie_functions.php");
+
+// Establishes connection
+$connection = dbConnect();
+
+// Displays all movies
+$allMovies = getAllMovies($connection);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +25,7 @@
 <body>
 
   <?php 
-    include_once('movies.php');
+    include_once('includes/movies.php');
   ?>
 
   <form id="bookings" name="bookings" method="post" action="purchaseTickets.php">
@@ -17,7 +33,7 @@
     <input name="name" type="text" placeholder="Enter your name..." required><br /><br />
 
     <label for="age">Age:</label><br />
-    <input name="age" type="number" min="0" max="150" placeholder="Enter your age..." required><br /><br />
+    <input name="age" type="number" min="1" max="99" placeholder="Enter your age..." required><br /><br />
 
     <!--select array from the movies.php-->
     <label for="movies">Movie:</label><br />
@@ -26,9 +42,10 @@
       <?php
       #loops the movies array of movie objects from movies.php and prints the values
         foreach ($movies as $value) {
-          echo "<option value='{$value->id}'>{$value->name} (Age: {$value->age}) - Cost \${$value->price}</option>";
+          echo "<option value='{$value->getId()}'>{$value->getName()} (Age: {$value->getAge()}) - Cost \${$value->getPrice()}</option>";
         }
       ?>
+      
     </select><br /><br />
     
     <label for="tickets">Tickets:</label><br />
@@ -38,7 +55,14 @@
     <input name="goingWithParent" type="checkbox"><br /><br />
 
     <input type="submit" value="Purchase Tickets">
-  </form>
-  
+  </form> <br />
+
+  <a href="loginpage.php">
+    <input type="button" value="Admin Login">
+  </a>
+  <?php
+// Terminates connection
+dbDisconnect($connection);
+?>
 </body>
 </html>

@@ -1,9 +1,11 @@
+<!-- Handles bookings -->
+
 <?php 
-include_once('movies.php');
+include_once('includes/movies.php');
 
 if($_POST['name'] && $_POST['age'] && $_POST['movies'] && $_POST['tickets']){
   $age_groups = [7, 11, 15, 18];
-
+  
   $name = $_POST['name'];
   $age = $_POST['age'];
   $selected_movie = $_POST['movies'];
