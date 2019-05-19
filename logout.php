@@ -16,7 +16,7 @@ session_destroy();
 </head>
 <body>
 
-<h2>You have been successfully logged out</h2>
+<h1>You have been successfully logged out</h1>
    <a href="index.php">
     <input type="button" value="Return to Startpage">
   </a>

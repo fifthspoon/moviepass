@@ -9,13 +9,25 @@
 <form action="checklogin.php" method="post">
     <h2>Login</h2>
 
-    <label>User (e-mail):</label>
-    <p><input type="email" name="txtUser" placeholder="user@user.com"></p>
+    <label>Email:</label>
+    <p><input type="email" name="uName" placeholder="user@user.com"></p>
 
     <label>Password:</label>
-    <p><input type="password" name="txtPassword" placeholder="password"></p>
+    <p><input type="password" name="uPass" placeholder="password"></p>
 
-    <p><input type="submit" name="submit" value="login"></p>
+    <p><input type="submit" name="submit" value="Login"></p>
 </form>
+
+<form action="register.php">
+   <h2>Register</h2>
+
+    <label>Email:</label>
+    <p><input type="email" name="uName" placeholder="user@user.com"></p>
+
+    <label>Password:</label>
+    <p><input type="password" name="uPass" placeholder="password"></p>
+
+    <p><input type="submit" name="submit" value="Register"></p>
+    </form>
 </body>
 </html>

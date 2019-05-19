@@ -1,33 +1,39 @@
 <?php
+//Includes database connection
+require("includes/conn_mysql.php");
+
 // Start Session
 session_start();
 
-// Preset login
-$user = "test@test.se";
-$pass = "123";
+$connection = dbConnect();
 
 // Fetches user and pass from the loginpage.php form
-$checkUser = $_POST['txtUser'];
-$checkPass = $_POST['txtPassword'];
-?>
+$checkUser = mysqli_real_escape_string($connection,$_POST['uName']);
+$checkPass = mysqli_real_escape_string($connection,$_POST['uPass']);
+//Checks for the user
+$query = "SELECT * FROM users WHERE userName = '$checkUser'";
 
-<!DOCTYPE html>
-<html lang="sv">
-<head>
- <title>Moviepass Login</title>
- <meta charset="utf-8" />
-</head>
-<body>
-<?php
-// Checks the session
-if($checkUser == $user && $checkPass == $pass){
-	$_SESSION['status'] = "ok";
-	echo "<p>You have successfully logged in.</p>";
-	echo '<p><a href="admin.php">Admin Dashboard</a></p>';
-} else{
-	echo "<p>Incorrect user or password</p>";
-	echo '<p><a href="index.php">Try again</a></p>';
+$result = mysqli_query($connection,$query) or die("Query failed: $query");
+
+$row = mysqli_fetch_assoc($result);
+
+//Count the rows to find the user
+$count = mysqli_num_rows($result);
+
+dbDisconnect($connection);
+
+if($count == 1) {
+	//Checks password
+	if ($checkPass === $row["userPass"]) {
+		$_SESSION['admin'] = $row;
+		// Redirects to admin page
+    	header("Location: http://localhost/moviepass/admin/index.php");
+    exit;
+	} else {
+		echo "<p>Login failed</p>";
+		echo '<p><a href="loginpage.php">Try again</a></p>';
+	}
 }
+
+
 ?>
-</body>
-</html>

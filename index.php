@@ -1,19 +1,20 @@
-<!-- Start Page: Guest -->
-<?php 
-/*
-  * Displays all movies
-*/
+<!-- Start Page: -->
+  <?php 
+    include_once('./includes/movies.php');
+    include_once('./includes/users.php');
+    include_once('./includes/conn_mysql.php');
+    include_once('./includes/movie_functions.php');
+    include_once('./includes/user_functions.php');
 
-// Includes functions and connections
-require("includes/conn_mysql.php");
-require("includes/movie_functions.php");
+    $movies = getAllMovies();
 
-// Establishes connection
-$connection = dbConnect();
+    // Start Session
+    session_start();
+    if (isset($_SESSION['admin']))
+    echo '<a href="admin/index.php"> User Account </a>';
+    
+  ?>
 
-// Displays all movies
-$allMovies = getAllMovies($connection);
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,16 +25,10 @@ $allMovies = getAllMovies($connection);
 </head>
 <body>
 
-  <?php 
-    include_once('includes/movies.php');
-  ?>
 
   <form id="bookings" name="bookings" method="post" action="purchaseTickets.php">
     <label for="name">Name:</label><br />
     <input name="name" type="text" placeholder="Enter your name..." required><br /><br />
-
-    <label for="age">Age:</label><br />
-    <input name="age" type="number" min="1" max="99" placeholder="Enter your age..." required><br /><br />
 
     <!--select array from the movies.php-->
     <label for="movies">Movie:</label><br />
@@ -45,24 +40,17 @@ $allMovies = getAllMovies($connection);
           echo "<option value='{$value->getId()}'>{$value->getName()} (Age: {$value->getAge()}) - Cost \${$value->getPrice()}</option>";
         }
       ?>
-      
     </select><br /><br />
     
     <label for="tickets">Tickets:</label><br />
     <input name="tickets" type="number" min="1" max="99" required><br /><br />
 
-    <label for="goingWithParent">Are you going with a person 18+?</label><br />
-    <input name="goingWithParent" type="checkbox"><br /><br />
-
     <input type="submit" value="Purchase Tickets">
   </form> <br />
 
   <a href="loginpage.php">
-    <input type="button" value="Admin Login">
+    <input type="button" value="Register or Login">
   </a>
-  <?php
-// Terminates connection
-dbDisconnect($connection);
-?>
+  
 </body>
 </html>
