@@ -25,7 +25,9 @@ dbDisconnect($connection);
 if($count == 1) {
 	//Checks password
 	if ($checkPass === $row["userPass"]) {
-		$_SESSION['admin'] = $row;
+		$_SESSION['userid'] = $row['userId'];
+		$_SESSION['admin'] = $row['userAdmin'];
+
 		// Redirects to admin page
     	header("Location: http://localhost/moviepass/admin/index.php");
     exit;

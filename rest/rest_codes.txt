@@ -1,0 +1,13 @@
+File explanations for lab 3
+
+conn_mysql = basic connection files to open and close database.
+
+user_create = POST userName and userPass values to create a user.
+
+user_functions = collection of all functions for create, read and delete functionality.
+
+user_read GET user information in json format.
+
+user_readall GET user information and which movies they've book through cross table relations.
+
+

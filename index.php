@@ -10,8 +10,8 @@
 
     // Start Session
     session_start();
-    if (isset($_SESSION['admin']))
-    echo '<a href="admin/index.php"> User Account </a>';
+    if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1)
+    echo '<a href="admin/index.php"><input type="button" value="Admin Dashboard"></a>';
     
   ?>
 
@@ -27,7 +27,7 @@
 
 
   <form id="bookings" name="bookings" method="post" action="purchaseTickets.php">
-    <label for="name">Name:</label><br />
+    <label for="name"></label><br />
     <input name="name" type="text" placeholder="Enter your name..." required><br /><br />
 
     <!--select array from the movies.php-->

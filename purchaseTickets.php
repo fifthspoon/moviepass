@@ -7,7 +7,7 @@ require('includes/movie_functions.php');
 
 // Start Session
    session_start();
-    if (isset($_SESSION['admin']))
+    if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1)
     echo 'Admin';
 
 if($_POST['name'] && $_POST['movies'] && $_POST['tickets']){
@@ -27,13 +27,12 @@ if($_POST['name'] && $_POST['movies'] && $_POST['tickets']){
 
   if($movies){
     $conn = dbConnect();
-
-    $query = "INSERT INTO booking (userId, movieId)
-    values($row,$movieId)";
+    $userId = $_SESSION['userid'];
+    $movieId = $movies->getId();
+    $query = "INSERT INTO booking (bookingUserId, bookingMovieId)
+    values($userId,$movieId)";
 
     $result = mysqli_query($conn,$query) or die("Query failed: $query");
-
-    $insId = mysqli_insert_id($conn);
 
     dbDisconnect($conn);
 

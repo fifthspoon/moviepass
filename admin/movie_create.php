@@ -7,8 +7,6 @@
 require("../includes/conn_mysql.php");
 require("../includes/movie_functions.php");
 
-
-
 // Add new movie?
 if(isset($_POST['isnew']) && $_POST['isnew'] == 1){
 	$saveMovie = saveMovie();

@@ -3,12 +3,6 @@ session_start();
 
 $base_url = "http://localhost/moviepass/";
 $admin_url = "http://localhost/moviepass/admin/";
-
-// Check if Admin
-if(!isset($_SESSION['status'])){
-	header("Location: ". $base_url);
-	exit;
-}
 ?>
 
 <!DOCTYPE html>

@@ -3,6 +3,7 @@
   * Displays all movies
 */
 
+
 // Includes all functions and connections
 require("../includes/conn_mysql.php");
 require("../includes/movie_functions.php");
